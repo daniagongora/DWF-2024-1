@@ -1,0 +1,32 @@
+<div class="body-content">
+    <div class="card">
+      <!-- Table title  -->
+      <div class="card-header">
+        <h4>Listado de categorías</h4>
+      </div>
+    
+      <!-- Table content -->
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr class="table-primary">
+              <th>category_id</th>
+              <th>code</th>
+              <th>category</th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Utiliza ngFor para iterar sobre las categorías -->
+            <tr *ngFor="let category of categories">
+              <td>{{ category.category_id }}</td>
+              <td>{{ category.code }}</td>
+              <td>{{ category.category }}</td>
+              <td>{{ category.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
