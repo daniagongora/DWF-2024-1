@@ -1,32 +1,83 @@
 <div class="body-content">
-    <div class="card">
-      <!-- Table title  -->
-      <div class="card-header">
-        <h4>Listado de categorías</h4>
+  <div class="card">
+    <!-- Table title  -->
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md">
+          <h4>Listado de categorías</h4>
+        </div>
+        <div class="col-md">
+          <!-- Botón para mostrar el modal del formulario -->
+          <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()">Nueva categoría</button>
+        </div>
       </div>
-    
-      <!-- Table content -->
-      <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr class="table-primary">
-              <th>category_id</th>
-              <th>code</th>
-              <th>category</th>
-              <th>status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Utiliza ngFor para iterar sobre las categorías -->
-            <tr *ngFor="let category of categories">
-              <td>{{ category.category_id }}</td>
-              <td>{{ category.code }}</td>
-              <td>{{ category.category }}</td>
-              <td>{{ category.status }}</td>
-            </tr>
-          </tbody>
-        </table>
+    </div>
+
+    <!-- Table content -->
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr class="table-primary">
+            <th>ID</th>
+            <th>codigo</th>
+            <th>categoria</th>
+            <th>estatus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Utiliza ngFor para iterar sobre las categorías -->
+          <tr *ngFor="let category of categories">
+            <td>{{ category.category_id }}</td>
+            <td>{{ category.code }}</td>
+            <td>{{ category.category }}</td>
+            <td>{{ category.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal form  -->
+  <div class="modal fade" data-bs-backdrop="static" tabindex="-1" role="dialog" id="modalForm">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- Título del modal -->
+          <h5 class="modal-title">Nueva categoría</h5>
+          <button type="button" class="modal-close-button" data-bs-dismiss="modal" aria-label="Close">
+            <span class="modal-close-button-x">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario para agregar una nueva categoría -->
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <!-- Campo de código de categoría -->
+            <div class="form-group">
+              <label for="code">Código <span class="color-red">*</span> </label>
+              <input type="text" class="form-control" formControlName="code" id="code" placeholder="Código de la categoría..." [ngClass]="{'is-invalid': form.controls['code'].errors && submitted}">
+              <div *ngIf="form.controls['code'].errors && submitted">
+                <small class="color-red">Favor de ingresar un código de categoría válido</small>
+              </div>
+            </div>
+
+            <!-- Campo de nombre de categoría -->
+            <div class="form-group">
+              <label for="category">Categoría <span class="color-red">*</span> </label>
+              <input type="text" class="form-control" formControlName="category" id="category" placeholder="Nombre de la categoría..." [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
+              <div *ngIf="form.controls['category'].errors && submitted">
+                <small class="color-red">Favor de ingresar una categoría válida</small>
+              </div>
+            </div>
+
+            <!-- Botón para guardar el formulario -->
+            <div class="form-button">
+              <button type="submit" class="btn btn-primary btn-form">Guardar</button>
+            </div>
+
+          </form>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>
