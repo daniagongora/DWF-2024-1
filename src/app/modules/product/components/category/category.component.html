@@ -41,17 +41,17 @@
             <td>
               <div class="dropdown">
                 <button class="dropdown-button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                  <i class="ph ph-dots-three-circle-vertical icon-menu"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" (click)="updateCategory(category)">
-                    <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                    <i class="ph ph-pencil-circle icon-text-ul"></i>Editar
                   </a>
                   <a *ngIf="category.status == 0" class="dropdown-item enable-item" (click)="enableCategory(category.category_id)">
-                    <i class="ph ph-check-circle icon-text-ul"></i> Activar
+                    <i class="ph ph-check-square icon-text-ul"></i> Activar
                   </a>
                   <a *ngIf="category.status == 1" class="dropdown-item disable-item" (click)="disableCategory(category.category_id)">
-                    <i class="ph ph-x-circle icon-text-ul"></i> Desactivar
+                    <i class="ph ph-x-square icon-text-ul"></i> Desactivar
                   </a>
                 </div>
               </div>
