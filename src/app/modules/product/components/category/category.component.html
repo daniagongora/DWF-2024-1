@@ -4,11 +4,11 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md">
-          <h4>Listado de categorías</h4>
+          <h4>Listado de postres</h4>
         </div>
         <div class="col-md">
           <!-- Botón para mostrar el modal del formulario -->
-          <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()">Nueva categoría</button>
+          <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()"><i class="ph ph-plus"></i>Nuevo postre </button>
         </div>
       </div>
     </div>
@@ -19,9 +19,10 @@
         <thead>
           <tr class="table-primary">
             <th>ID</th>
-            <th>codigo</th>
-            <th>categoria</th>
-            <th>estatus</th>
+            <th>Código</th>
+            <th>Postre</th>
+            <th>Estatus</th>
+            <th>Más</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +31,32 @@
             <td>{{ category.category_id }}</td>
             <td>{{ category.code }}</td>
             <td>{{ category.category }}</td>
-            <td>{{ category.status }}</td>
+            <td>
+              <div class="td-status"
+            [ngClass]="{'td-status-enable': category.status == 1, 'td-status-disable': category.status == 0}" >
+              {{ category.status == 0 ? "Entregado" : "Sin entregar" }}
+            </div>
+              
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="dropdown-button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="updateCategory(category)">
+                    <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                  </a>
+                  <a *ngIf="category.status == 0" class="dropdown-item enable-item" (click)="enableCategory(category.category_id)">
+                    <i class="ph ph-check-circle icon-text-ul"></i> Activar
+                  </a>
+                  <a *ngIf="category.status == 1" class="dropdown-item disable-item" (click)="disableCategory(category.category_id)">
+                    <i class="ph ph-x-circle icon-text-ul"></i> Desactivar
+                  </a>
+                </div>
+              </div>
+              
+            </td>
           </tr>
         </tbody>
       </table>
@@ -43,7 +69,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <!-- Título del modal -->
-          <h5 class="modal-title">Nueva categoría</h5>
+          <h5 class="modal-title">Nuevo postre  </h5> 
           <button type="button" class="modal-close-button" data-bs-dismiss="modal" aria-label="Close">
             <span class="modal-close-button-x">&times;</span>
           </button>
@@ -55,18 +81,18 @@
             <!-- Campo de código de categoría -->
             <div class="form-group">
               <label for="code">Código <span class="color-red">*</span> </label>
-              <input type="text" class="form-control" formControlName="code" id="code" placeholder="Código de la categoría..." [ngClass]="{'is-invalid': form.controls['code'].errors && submitted}">
+              <input type="text" class="form-control" formControlName="code" id="code" placeholder="Código del postre..." [ngClass]="{'is-invalid': form.controls['code'].errors && submitted}">
               <div *ngIf="form.controls['code'].errors && submitted">
-                <small class="color-red">Favor de ingresar un código de categoría válido</small>
+                <small class="color-red">Favor de ingresar un código de postre válido</small>
               </div>
             </div>
 
             <!-- Campo de nombre de categoría -->
             <div class="form-group">
-              <label for="category">Categoría <span class="color-red">*</span> </label>
-              <input type="text" class="form-control" formControlName="category" id="category" placeholder="Nombre de la categoría..." [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
+              <label for="category">Postre <span class="color-red">*</span> </label>
+              <input type="text" class="form-control" formControlName="category" id="category" placeholder="Nombre del postre..." [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
               <div *ngIf="form.controls['category'].errors && submitted">
-                <small class="color-red">Favor de ingresar una categoría válida</small>
+                <small class="color-red">Favor de ingresar un postre válido</small>
               </div>
             </div>
 
