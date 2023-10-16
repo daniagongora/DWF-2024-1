@@ -6,8 +6,8 @@ export class Category{
 
     constructor(category_id: number, code: string, category: string, status: number){
         this.category_id = category_id;
-        this.code = code;
         this.category = category;
+        this.code = code;
         this.status = status;
     }
 

@@ -28,22 +28,23 @@ export class CategoryComponent implements OnInit {
     this.getCategories();
   }
 
-  disableCategory(id: number){
+  enableCategory(id: number){
     for(let category of this.categories){
       if(category.category_id == id){
-        category.status = 0;
-        alert("Postre sin entregar!");
+        category.status = 1;
+        
+        alert("Se ha quitado la entrega");
         break;
       }
     }
     console.log("SALIR")
   }
 
-  enableCategory(id: number){
+  disableCategory(id: number){
     for(let category of this.categories){
       if(category.category_id == id){
-        category.status = 1;
-        alert("Postre entregado exitosamente!");
+        category.status = 0;
+        alert("Postre entregado");
         break;
       }
     }
@@ -73,22 +74,32 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  onSubmitCreate(){
+  onSubmitCreate() {
     this.submitted = true;
-
-    if(this.form.invalid) return;
-
+  
+    if (this.form.invalid) return;
+  
     this.submitted = false;
-
-    let category = new Category(0, this.form.controls['code'].value!, this.form.controls['category'].value!, 1);
-    console.log(this.form.value);
+  
+    // Para guardar el ID unico para encontrar y editar
+    let maxCategoryID = 0;
+    for (let category of this.categories) {
+      if (category.category_id > maxCategoryID) {
+        maxCategoryID = category.category_id;
+      }
+    }
+  
+    // Se crea el objeto con el id unico, no solo se pone en el html
+    let category = new Category(maxCategoryID + 1, this.form.controls['code'].value!, this.form.controls['category'].value!, 1);
+  
     this.categories.push(category);
-    
+  
     $("#modalForm").modal("hide");
-
-    alert("Postre guardada exitosamente!");
-
+  
+    alert("Postre guardado exitosamente!");
   }
+  
+  
 
   onSubmitUpdate(){
     this.submitted = true;
@@ -107,7 +118,7 @@ export class CategoryComponent implements OnInit {
     
     $("#modalForm").modal("hide");
 
-    alert("Postre actualizada exitosamente!");
+    alert("Postre actualizado exitosamente!");
 
     this.categoryUpdated = 0;
 
@@ -117,8 +128,9 @@ export class CategoryComponent implements OnInit {
     this.categoryUpdated = category.category_id;
     
     this.form.reset();
-    this.form.controls['category'].setValue(category.code);
-    this.form.controls['code'].setValue(category.category);
+    this.form.controls['code'].setValue(category.code);
+    this.form.controls['category'].setValue(category.category);
+
     
     this.submitted = false;
     $("#modalForm").modal("show");

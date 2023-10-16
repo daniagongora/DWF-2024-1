@@ -87,10 +87,10 @@
     color: white;
   }
   .td-status-enable{
-    background-color: #487aa1;
+    background-color: #de6666;
   }
   .td-status-disable{
-    background-color: #de6666;
+    background-color: #487aa1; 
   }
   /* Icon  */
 .icon-text-button{
@@ -102,11 +102,11 @@
   margin-right: 8px;
 }
 .icon-menu{
-  font-size: 14px;
+  font-size: 25px;
   cursor: pointer;
 }
 .icon-menu:hover{
-  color: blue;
+  color: #78c2ad;
 }
 /* ul dropdown  */
 .dropdown-button{
