@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../_models/category'; // Importa la clase Category
 import { FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 declare var $: any;
 
@@ -118,7 +119,16 @@ export class CategoryComponent implements OnInit {
     
     $("#modalForm").modal("hide");
 
-    alert("Postre actualizado exitosamente!");
+    //alert("Postre actualizado exitosamente!")
+    Swal.fire({
+      title: 'Postre actualizado exitosamente!',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
 
     this.categoryUpdated = 0;
 
