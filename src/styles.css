@@ -19,6 +19,19 @@
     top: 50%;
     transform: translateY(-50%);
   }
+  /* botones */
+.btn.btn-primary.btn-new {
+  position: relative;
+}
+
+.btn.btn-primary.btn-new .ph.ph-plus {
+  position: absolute;
+  left: 5px; /* Ajusta el valor según tu preferencia */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px; /* Ajusta el tamaño del icono según tus necesidades */
+}
+
   
   /* Modal  */
   
@@ -65,4 +78,61 @@
   .color-red{
     color: red;
   }
+
+  .td-status{
+    position: absolute;
+    width: 90px;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+  }
+  .td-status-enable{
+    background-color: #de6666;
+  }
+  .td-status-disable{
+    background-color: #487aa1; 
+  }
+  /* Icon  */
+.icon-text-button{
+  font-size: 14px;
+  margin-right: 4px;
+}
+.icon-text-ul{
+  font-size: 14px;
+  margin-right: 8px;
+}
+.icon-menu{
+  font-size: 25px;
+  cursor: pointer;
+}
+.icon-menu:hover{
+  color: #78c2ad;
+}
+/* ul dropdown  */
+.dropdown-button{
+  border: none;
+  background-color: white;
+}
+.dropdown-item{
+  color: black !important;
+  cursor: pointer;
+}
+.dropdown-item:hover{
+  color: white !important;
+}
+.enable-item{
+  color: blue !important;
+  cursor: pointer;
+}
+.enable-item:hover{
+  color: white !important;
+}
+.disable-item{
+  color: red !important;
+  cursor: pointer;
+}
+.disable-item:hover{
+  color: white !important;
+}
+
 /*# sourceMappingURL=bootstrap.min.css.map */
