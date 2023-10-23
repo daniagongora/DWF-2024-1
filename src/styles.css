@@ -87,10 +87,10 @@
     color: white;
   }
   .td-status-enable{
-    background-color: #de6666;
+    background-color: #ff7851;
   }
   .td-status-disable{
-    background-color: #487aa1; 
+    background-color: #6cc3d5; 
   }
   /* Icon  */
 .icon-text-button{
@@ -133,6 +133,24 @@
 }
 .disable-item:hover{
   color: white !important;
+}
+/* Cambia el color del texto y el icono en la alerta de éxito */
+.swal2-title {
+  color: #56CC9D; /* Cambia el color del texto del título a naranja */
+}
+
+.swal2-content {
+  color: #56CC9D; /* Cambia el color del texto del contenido a azul */
+}
+
+.swal2-icon {
+  color: #56CC9D; /* Cambia el color del icono a naranja */
+}
+
+/* Cambia el color del icono de éxito específicamente */
+.swal2-success-icon::before {
+  color: #56CC9D; /* Cambia el color del icono de éxito a verde claro */
+  
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
