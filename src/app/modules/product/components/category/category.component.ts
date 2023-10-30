@@ -1,73 +1,133 @@
-import { Component, OnInit } from '@angular/core';
-import { Category } from '../../_models/category'; // Importa la clase Category
+import { Component } from '@angular/core';
+import { Category } from '../../_models/category';
 import { FormBuilder, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { CategoryService } from '../../_services/category.service';
 
-declare var $: any;
+import Swal from'sweetalert2'; // sweetalert
+
+declare var $: any; // jquery
 
 @Component({
-  selector: 'app-category',
+  selector: 'app-customer',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })
-export class CategoryComponent implements OnInit {
-  categories: Category[] = []; // Declarar un arreglo de objetos Category
-  categoryUpdated: number = 0;
-  
+export class CategoryComponent {
+  categories: Category[] = []; // lista de categorias
+  categoryUpdated: number = 0; // id de la región a actualizar
+
+  // formulario de registro
   form = this.formBuilder.group({
     category: ["", [Validators.required]],
     code: ["", [Validators.required]],
   });
 
-  submitted = false;
-  
+  submitted = false; // indica si se envió el formulario
+
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder, // formulario
+    private categoryService: CategoryService // servicio region de API
   ){}
 
-  ngOnInit() {
+  // primera función que se ejecuta
+  ngOnInit(){
     this.getCategories();
   }
 
+  // CRUD region
+
   enableCategory(id: number){
-    for(let category of this.categories){
-      if(category.category_id == id){
-        category.status = 1;
+    this.categoryService.enableCategory(id).subscribe(
+      res => {
+        // mensaje de confirmación
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          title: '¡Éxito!',
+          text: 'Se ha quitado la entrega',
+          showConfirmButton: false,
+          timer: 2000,
+          background: '#F8F9FA',
+        });
         
-        alert("Se ha quitado la entrega");
-        break;
+
+        this.getCategories(); // consulta regiones con los cambios realizados
+      },
+      err => {
+        // mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F3969A',
+          timer: 2000
+        });
       }
-    }
-    console.log("SALIR")
+    );
   }
 
   disableCategory(id: number){
-    for(let category of this.categories){
-      if(category.category_id == id){
-        category.status = 0;
-        alert("Postre entregado");
-        break;
+    this.categoryService.disableCategory(id).subscribe(
+      res => {
+        // mensaje de confirmación
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          title: '¡Éxito!',
+          text: 'El postre se ha entregado',
+          showConfirmButton: false,
+          timer: 2000,
+          background: '#F8F9FA',
+        });
+
+        this.getCategories(); // consulta regiones con los cambios realizados
+      },
+      err => {
+        // mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F3969A',
+          timer: 2000
+        });
       }
-    }
+    );
   }
 
-  getCategories() {
-    // Agrega tres objetos Category con datos dummy al arreglo categories
-    let category1 = new Category(1087, "50192404", 'Pastel', 1);
-    let category2 = new Category(3456, "50182002", 'Brownie', 0);
-    let category3 = new Category(3346, "50182001", 'Muffin', 1);
-    let category4 = new Category(3345, "50182000", 'Carlota', 0);
-    let category5 = new Category(5679, "50181906", 'Flan', 1);
-
-    // Agrega los objetos Category al arreglo categories
-    this.categories.push(category1);
-    this.categories.push(category2);
-    this.categories.push(category3);
-    this.categories.push(category4);
-    this.categories.push(category5);
+  getCategories(){
+    this.categoryService.getCategories().subscribe(
+      res => {
+        this.categories = res; // asigna la respuesta de la API a la lista de categorias
+      },
+      err => {
+        // mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F3969A',
+          timer: 2000
+        });
+      }
+    );
   }
 
   onSubmit(){
+    // valida el formulario
+    this.submitted = true;
+    if(this.form.invalid) return;
+    this.submitted = false;
+
+    // ejecuta la función crear o actualizar según corresponda
     if(this.categoryUpdated == 0){
       this.onSubmitCreate();
     }else{
@@ -75,63 +135,74 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  onSubmitCreate() {
-    this.submitted = true;
-  
-    if (this.form.invalid) return;
-  
-    this.submitted = false;
-  
-    // Para guardar el ID unico para encontrar y editar
-    let maxCategoryID = 0;
-    for (let category of this.categories) {
-      if (category.category_id > maxCategoryID) {
-        maxCategoryID = category.category_id;
+  onSubmitCreate(){
+    this.categoryService.createCategory(this.form.value).subscribe(
+      res => {
+        // muestra mensaje de confirmación
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          title: '¡Éxito!',
+          text: 'La categoria ha sido registrada',
+          showConfirmButton: false,
+          timer: 2000,
+          background: '#F8F9FA',
+        });
+
+        this.getCategories(); // consulta regiones con los cambios realizados
+    
+        $("#modalForm").modal("hide"); // oculta el modal de registro
+      },
+      err => {
+        // muestra mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F3969A',
+          timer: 2000
+        });
       }
-    }
-  
-    // Se crea el objeto con el id unico, no solo se pone en el html
-    let category = new Category(maxCategoryID + 1, this.form.controls['code'].value!, this.form.controls['category'].value!, 1);
-  
-    this.categories.push(category);
-  
-    $("#modalForm").modal("hide");
-  
-    alert("Postre guardado exitosamente!");
+    );
   }
-  
-  
 
   onSubmitUpdate(){
-    this.submitted = true;
+    this.categoryService.updateCategory(this.form.value, this.categoryUpdated).subscribe(
+      res => {
+        // muestra mensaje de confirmación
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          title: '¡Éxito!',
+          text: 'La categoria ha sido actualizada',
+          showConfirmButton: false,
+          timer: 2000,
+          background: '#F8F9FA',
+        });
 
-    if(this.form.invalid) return;
-
-    this.submitted = false;
-
-    for(let category of this.categories){
-      if(category.category_id == this.categoryUpdated){
-        category.code = this.form.controls['code'].value!;
-        category.category = this.form.controls['category'].value!;
-        break;
-      }
-    }
+        this.getCategories(); // consulta regiones con los cambios realizados
     
-    $("#modalForm").modal("hide");
+        $("#modalForm").modal("hide"); // oculta el modal de registro
 
-    //alert("Postre actualizado exitosamente!")
-    Swal.fire({
-      title: 'Postre actualizado exitosamente!',
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        this.categoryUpdated = 0; // resetea el id de la región que se actualiza a 0
       },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
+      err => {
+        // muestra mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F3969A',
+          timer: 2000
+        });
       }
-    })
-
-    this.categoryUpdated = 0;
-
+    );
   }
 
   updateCategory(category: Category){
@@ -146,12 +217,12 @@ export class CategoryComponent implements OnInit {
     $("#modalForm").modal("show");
   }
 
+  // modals 
+
   showModalForm(){
     this.form.reset();
     this.categoryUpdated = 0;
     this.submitted = false;
     $("#modalForm").modal("show");
   }
-
-  
 }
