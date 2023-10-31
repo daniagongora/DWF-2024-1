@@ -4,20 +4,28 @@ import { CategoryComponent } from './components/category/category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ProductComponent } from './components/product/product.component';
+import {NgxPhotoEditorModule} from "ngx-photo-editor";
+import { ProductImageComponent } from './components/product-image/product-image.component';
+
 
 @NgModule({
   declarations: [
-    CategoryComponent
+    CategoryComponent,
+    ProductComponent,
+    ProductImageComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPhotoEditorModule,
   ],
   exports: [
     CategoryComponent,
+    ProductComponent,
     // CommonModule,
   ]
 })
