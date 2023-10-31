@@ -22,7 +22,7 @@ export class ProductImageComponent {
 
   product: any | Product = new Product(); // cliente consultado
   gtin: any | string = ""; // gtin del cliente consultado
-
+  productImages: ProductImage[] = [];
   categorys: Category[] = []; // lista de categoryes
   category: any | Category = new Category(); // datos de la región del cliente
 
@@ -40,7 +40,7 @@ export class ProductImageComponent {
 
   constructor(
     private productService: ProductService, // servicio product de API
-    private ProductImageService: ProductImageService, // servicio product image de API
+    public ProductImageService: ProductImageService, // servicio product image de API
     private formBuilder: FormBuilder, // formulario
     private categoryService: CategoryService, // servicio category de API
     private route: ActivatedRoute, // recupera parámetros de la url
@@ -48,34 +48,32 @@ export class ProductImageComponent {
 
     private service: NgxPhotoEditorService
   ){}
-
-  ngOnInit(){
+  ngOnInit() {
     this.gtin = this.route.snapshot.paramMap.get('gtin');
-    if(this.gtin){
+    if (this.gtin) {
       this.getProduct();
-    }else{
+    } else {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
         toast: true,
         showConfirmButton: false,
-        text: 'GNIT de producto inválido',
+        text: 'GTIN de producto inválido',
         background: '#F8E8F8',
         timer: 2000
       });
     }
   }
-
-  // CRUD product
-
-  getProduct(){
+  
+  getProduct() {
     this.productService.getProduct(this.gtin).subscribe(
-      res => {
+      (res) => {
         this.product = res; // asigna la respuesta de la API a la variable de producto
         this.getCategory(this.product.category_id);
         console.log('Producto obtenido:', this.product);
+        this.visualizeImage(this.product.product_id);
       },
-      err => {
+      (err) => {
         // muestra mensaje de error
         Swal.fire({
           position: 'top-end',
@@ -89,6 +87,7 @@ export class ProductImageComponent {
       }
     );
   }
+  
   
 
   onSubmit(){
@@ -161,19 +160,14 @@ export class ProductImageComponent {
   
 
   // product image
-
-  updateProductImage(image: string) {
-    const productImage: ProductImage = new ProductImage();
+  updateProductImage(image: string){
+    let productImage: ProductImage = new ProductImage();
+    productImage.product_id = this.product.product_id; // Asigna el product_id del producto actual
     productImage.image = image;
   
-    if (this.product.image) {
-      // Si ya existe una imagen, actualiza su product_image_id
-      productImage.product_image_id = this.product.image.product_image_id;
-    }
-  
-    this.ProductImageService.updateProductImage(productImage).subscribe(
+    this.ProductImageService.uploadProductImage(productImage).subscribe(
       res => {
-        // Muestra un mensaje de confirmación
+        // Muestra mensaje de confirmación
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -189,7 +183,7 @@ export class ProductImageComponent {
         $("#modalForm").modal("hide"); // Oculta el modal de registro
       },
       err => {
-        // Muestra un mensaje de error
+        // Muestra mensaje de error
         Swal.fire({
           position: 'top-end',
           icon: 'error',
@@ -203,8 +197,23 @@ export class ProductImageComponent {
     );
   }
   
+  visualizeImage(productId: number) {
+    this.ProductImageService.getProductImage(productId).subscribe(
+      (productImages: ProductImage[]) => {
+        // Modifica las rutas de las imágenes para que sean URLs completas
+        productImages.forEach(image => {
+          // Solo modifica la parte final de la URL de la imagen
+          image.image = `http://localhost:8080/${image.image}`;
+        });
+        this.productImages = productImages;
+        console.log('Imágenes del producto:', productImages);
+      },
+      (err) => {
+        console.error('Error al obtener imágenes del producto:', err);
+      }
+    );
+  }
   
-
   // catalogues
 
   getCategories(){
@@ -227,6 +236,7 @@ export class ProductImageComponent {
     );
   }
 
+  
   // auxiliary functions
 
   getCategory(id: number){

@@ -8,11 +8,17 @@ import { ProductImage } from '../_models/product-image';
 export class ProductImageService {
 
   private url = "http://localhost:8080";
-  private route = "/product-image";
+  private route = "/product-image";  // Ruta para actualizar la imagen de producto
 
   constructor(private http: HttpClient) { }
 
-  updateProductImage(product_image: ProductImage) {
-    return this.http.put(this.url + this.route, product_image);
+  uploadProductImage(productImage: ProductImage) {
+    return this.http.post(`${this.url}${this.route}`, productImage);
   }
+
+  getProductImage(productId: number) {
+    const apiUrl = `${this.url}/${this.route}/${productId}`;
+    return this.http.get<ProductImage[]>(apiUrl); 
+  }
+
 }

@@ -1,35 +1,30 @@
 <div class="card-header">
-    <div class="row">
-      <div class="col-md">
-        <span class="btn-return" (click)="redirect(['product'])">
-          <i class="ph ph-arrow-circle-left icon-text-button"></i>
-          Regresar
-        </span>
-      </div>
-  
-      <div class="col-md">
-        <span class="edit-product" (click)="updateProduct()">
-          <i class="ph ph-note-pencil icon-text-button"></i>
-          Editar producto
-        </span>
-      </div>
-    </div>
+    <!-- Otras partes del encabezado... -->
   </div>
   <br>
   <div class="card-body">
     <div class="row">
       <!-- product image -->
-<div class="col-md-4">
-    <div class="card">
-      <div class="edit-product-image text-center">
-        <label for="uploadImage" class="cursor-pointer">
-          <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
-          <i class="ph ph-note-pencil icon-text-button"></i>
-          Editar imagen
-        </label>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="edit-product-image text-center">
+            <label for="uploadImage" class="cursor-pointer">
+              <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
+              <i class="ph ph-note-pencil icon-text-button"></i>
+              Editar imagen
+            </label>
+          </div>
+          <!-- Muestra la imagen del producto -->
+          <div >
+            <div *ngIf="productImages.length > 0">
+                <img [src]="productImages[0].image" alt="Product Image">
+              </div>
+              
+
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+      
   <!-- product data -->
   <div class="col-md-8">
     <div class="card">
