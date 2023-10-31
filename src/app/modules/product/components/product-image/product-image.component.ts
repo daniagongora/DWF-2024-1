@@ -200,10 +200,9 @@ export class ProductImageComponent {
   visualizeImage(productId: number) {
     this.ProductImageService.getProductImage(productId).subscribe(
       (productImages: ProductImage[]) => {
-        // Modifica las rutas de las imágenes para que sean URLs completas
         productImages.forEach(image => {
-          // Solo modifica la parte final de la URL de la imagen
-          image.image = `http://localhost:8080/${image.image}`;
+          // Construye la URL completa de la imagen
+          image.image = `API/imagenes/${productId}/${image.image}`;
         });
         this.productImages = productImages;
         console.log('Imágenes del producto:', productImages);
@@ -213,6 +212,8 @@ export class ProductImageComponent {
       }
     );
   }
+  
+
   
   // catalogues
 

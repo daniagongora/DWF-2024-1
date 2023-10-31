@@ -9,7 +9,7 @@
         </div>
         <div class="col-md">
           <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()">
-            <i class="ph ph-plus-circle icon-text-button"></i>
+            <i class="ph ph-plus icon-text-button"></i>
             Nuevo producto
           </button>
         </div>
@@ -49,13 +49,14 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item"  (click)="showProduct(product.gtin)">
-                    <i class="ph ph-note-pencil icon-text-ul"></i>Ver detalles
+                    <i class="ph ph-pencil-circle icon-text-ul"></i>Ver detalles
                   </a>
-                  <a *ngIf="product.status == 0" class="dropdown-item enable-item" (click)="enableProduct(product.product_id)">
-                    <i class="ph ph-check-circle icon-text-ul"></i> Desactivar
+                  <a *ngIf="product.status == 0" class="dropdown-item disable-item" (click)="enableProduct(product.product_id)">
+                    <i class="ph ph-prohibit icon-text-ul"></i>
+                    Quitar entrega
                   </a>
-                  <a *ngIf="product.status == 1" class="dropdown-item disable-item" (click)="disableProduct(product.product_id)">
-                    <i class="ph ph-x-circle icon-text-ul"></i> Activar
+                  <a *ngIf="product.status == 1" class="dropdown-item enable-item" (click)="disableProduct(product.product_id)">
+                    <i class="ph ph-check-fat icon-text-ul"></i> Entregar
                   </a>
                 </div>
               </div>
