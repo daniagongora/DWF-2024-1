@@ -25,6 +25,7 @@ export class ProductImageComponent {
   productImages: ProductImage[] = [];
   categorys: Category[] = []; // lista de categoryes
   category: any | Category = new Category(); // datos de la región del cliente
+  
 
   // formulario de actualización
   form = this.formBuilder.group({
@@ -206,14 +207,48 @@ export class ProductImageComponent {
         });
         this.productImages = productImages;
         console.log('Imágenes del producto:', productImages);
+        
       },
-      (err) => {
-        console.error('Error al obtener imágenes del producto:', err);
+      err => {
+        // Muestra mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F8E8F8',
+          timer: 2000
+        });
       }
     );
   }
   
-
+  deleteImage(productId: number) {
+    this.ProductImageService.deleteProductImage(productId).subscribe(
+      (response) => {
+        // Image has been successfully deleted.
+        console.log('Imagen eliminada:', response);
+        
+        // Remove the image from the carousel
+        this.productImages.splice(this.productImages.findIndex((image) => image.product_image_id === productId), 1);
+        
+      },
+      err => {
+        // Muestra mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F8E8F8',
+          timer: 2000
+        });
+      }
+    );
+  }
+  
   
   // catalogues
 
@@ -282,6 +317,7 @@ export class ProductImageComponent {
     });
   }
 
+  
   redirect(url: string[]){
     this.router.navigate(url);
   }

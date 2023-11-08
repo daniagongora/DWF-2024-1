@@ -31,3 +31,13 @@
     font-size: 32px;
     margin-bottom: 16px;
 }
+
+.carousel-control-next-icon {
+    background-color: green;
+}
+.carousel-control-prev-icon{
+    background-color: green;
+}
+
+
+  
