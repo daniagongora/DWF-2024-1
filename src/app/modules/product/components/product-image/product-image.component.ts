@@ -202,7 +202,7 @@ export class ProductImageComponent {
       (productImages: ProductImage[]) => {
         productImages.forEach(image => {
           // Construye la URL completa de la imagen
-          image.image = `API/imagenes/${productId}/${image.image}`;
+          image.image = `assets/imagenes/imagenes/${image.image}`;
         });
         this.productImages = productImages;
         console.log('Imágenes del producto:', productImages);
