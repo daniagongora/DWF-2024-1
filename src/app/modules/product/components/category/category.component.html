@@ -34,7 +34,7 @@
           <td>{{ i + 1 }}</td>
           <td>{{ category.code }}</td>
           <td>{{ category.category }}</td>
-          <td>
+          <td> 
             <div class="td-status"
             [ngClass]="{'td-status-enable': category.status == 1, 'td-status-disable': category.status == 0}" >
               {{ category.status == 0 ? "Entregado" : "Sin entregar" }}

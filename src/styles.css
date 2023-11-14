@@ -153,4 +153,16 @@
   
 }
 
+/* Clase para el icono de check */
+.check-icon {
+  color: blue;
+}
+
+/* Clase para el icono de prohibido */
+.prohibit-icon {
+  color: red;
+}
+
+
+
 /*# sourceMappingURL=bootstrap.min.css.map */
