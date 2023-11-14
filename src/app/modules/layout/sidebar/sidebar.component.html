@@ -1,37 +1,100 @@
-<script type='text/javascript' src='//code.jquery.com/jquery-1.10.1.js'></script>
-<body>
-    <nav class='sidebar sidebar-menu-collapsed'>
-      <a href='#' id='justify-icon'>
-        <span class='glyphicon glyphicon-align-justify'></span>
-      </a>
-      <ul>
-        <li class='active'>
-          <a class='expandable' href='#' title='Dashboard'>
-            <span class='glyphicon glyphicon-home collapsed-element'></span>
-            <span class='expanded-element'>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a class='expandable' href='#' title='APIs'>
-            <span class='glyphicon glyphicon-wrench collapsed-element'></span>
-            <span class='expanded-element'>APIs</span>
-          </a>
-        </li>
-        <li>
-          <a class='expandable' href='#' title='Settings'>
-            <span class='glyphicon glyphicon-cog collapsed-element'></span>
-            <span class='expanded-element'>Settings</span>
-          </a>
-        </li>
-        <li>
-          <a class='expandable' href='#' title='Account'>
-            <span class='glyphicon glyphicon-user collapsed-element'></span>
-            <span class='expanded-element'>Account</span>
-          </a>
-        </li>
-      </ul>
-      <a href='#' id='logout-icon' title='Logout'>
-        <span class='glyphicon glyphicon-off'></span>
-      </a>
-    </nav>
-  </body>
+<!--Main Navigation-->
+<header>
+   
+<!-- Navbar -->
+<nav id="main-navbar" class="navbar navbar-expand-lg bg-primary navbar-light fixed-top">
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+            aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="#"></a>
+        <!-- Search form -->
+        <form class="d-none d-md-flex input-group w-auto my-auto">
+            <input autocomplete="off" type="search" class="form-control rounded"
+                placeholder='Busca entre nuestros productos :D' style="min-width: 400px;" />
+            <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
+        </form>
+
+        <!-- Right links -->
+        <ul class="navbar-nav ms-auto d-flex flex-row">
+            <!-- Notification button -->
+            <li class="nav-item">
+                <button class="nav-link me-3 me-lg-0 btn btn-link" type="button">
+                    <i class="ph ph-shopping-cart-simple cart-icon"></i>
+                </button>
+            </li>
+
+            <!-- Icon -->
+            <li class="nav-item">
+                <a class="nav-link me-3 me-lg-0" href="#">
+                    <i class="fas fa-fill-drip"></i>
+                </a>
+            </li>
+            <!-- Icon -->
+            <li class="nav-item me-3 me-lg-0">
+                <a class="nav-link" href="#">
+                    <i class="fab fa-github"></i>
+                </a>
+            </li>
+
+            <!-- Avatar dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+                    id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="assets/PERFIL-VACIO.png" class="rounded-circle" height="22" alt="Avatar"
+                        loading="lazy" />
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Ajustes</a></li>
+                    <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- Navbar -->
+
+<!--Main layout-->
+<main style="margin-top: 58px;">
+    <div class="container pt-4"></div>
+</main>
+<!--Main layout-->
+
+ <!-- Sidebar -->
+ <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" >
+    <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Menu</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fas fa-chart-area fa-fw me-3"></i><span>Productos</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fas fa-lock fa-fw me-3"></i><span>Clientes</span></a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fas fa-chart-line fa-fw me-3"></i><span>Categorias</span></a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fas fa-chart-pie fa-fw me-3"></i><span>Regiones</span>
+            </a>
+        </div>
+    </div>
+</nav>
+<!-- Sidebar -->
+
+<!-- Sidebar -->
+</header>
+<!--Main Navigation-->
+
+  <!--Main Navigation-->
+  
+  <!--Main layout-->
+  <main style="margin-top: 58px;">
+    <div class="container pt-4"></div>
+  </main>
+  <!--Main layout-->
