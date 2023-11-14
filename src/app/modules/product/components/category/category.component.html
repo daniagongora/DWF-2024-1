@@ -37,7 +37,7 @@
           <td> 
             <div class="td-status"
             [ngClass]="{'td-status-enable': category.status == 1, 'td-status-disable': category.status == 0}" >
-              {{ category.status == 0 ? "Entregado" : "Sin entregar" }}
+              {{ category.status == 0 ? "Activo" : "Inactivo" }}
             </div>
           </td>
           <td>
@@ -51,10 +51,10 @@
                 </a>
                 <a *ngIf="category.status == 0" class="dropdown-item disable-item" (click)="enableCategory(category.category_id)">
                   <i class="ph ph-prohibit icon-text-ul"></i>
-                  Quitar entrega
+                  Desactivar
                 </a>
                 <a *ngIf="category.status == 1" class="dropdown-item enable-item" (click)="disableCategory(category.category_id)">
-                  <i class="ph ph-check-fat icon-text-ul"></i> Entregar
+                  <i class="ph ph-check-fat icon-text-ul"></i> Activar
                 </a>
               </div>
             </div>

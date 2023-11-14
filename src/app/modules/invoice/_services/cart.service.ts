@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,14 @@ export class CartService {
   }
 
   /* REQUERIMIENTO 4. Implementar servicio Cart - función getCart() */
-  getCart() {}
+  getCart(rfc: string) {
+    const params = new HttpParams().set('rfc', rfc);
+    return this.http.get(this.url + this.route, { params });
+  }
 
   /* REQUERIMIENTO 4. Implementar servicio Cart - función removeFromCart() */
-  removeFromCart() {}
+  removeFromCart(id:number) {
+    return this.http.delete(this.url + this.route + '/' + id);
+  
+  }
 }

@@ -6,18 +6,25 @@ import { ProductImageComponent } from './modules/product/components/product-imag
 import { RegionComponent } from './modules/customer/components/region/region.component';
 import { CustomerComponent } from './modules/customer/components/customer/customer.component';
 import { CustomerImageComponent } from './modules/customer/components/customer-image/customer-image.component';
-
+import { MainViewComponent } from './modules/intro/main-view/main-view.component';
+import { InvoiceComponent } from './modules/invoice/components/invoice/invoice.component';
+import { CartComponent } from './modules/invoice/components/cart/cart.component';
+import { ItemComponent } from './modules/invoice/components/item/item.component';
 
 const routes: Routes = [
   // Otras rutas pueden estar presentes aquí
 
   // Agrega la ruta "category" que apunta al componente "CategoryComponent"
+  { path: "main-view", component: MainViewComponent},
   { path: 'category', component: CategoryComponent },
   { path: "product", component: ProductComponent },
   { path: "product/:gtin", component: ProductImageComponent },
   { path: "region", component: RegionComponent },
   { path: "customer", component: CustomerComponent },
   { path: "customer/:rfc", component: CustomerImageComponent },
+  { path: "invoice", component: InvoiceComponent},
+  { path: "cart", component:CartComponent},
+  { path: "item", component: ItemComponent},
   // Otras rutas pueden estar presentes aquí
 ];
 

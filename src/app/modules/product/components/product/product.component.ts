@@ -28,7 +28,7 @@ export class ProductComponent {
     stock: ["", [Validators.required, Validators.pattern('^[0-9]*$')]],
     category_id: ["", [Validators.required]],
   });
-
+  
   submitted = false; // indica si se envió el formulario
 
   constructor(

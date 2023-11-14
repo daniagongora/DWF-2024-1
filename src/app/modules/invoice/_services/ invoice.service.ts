@@ -1,6 +1,6 @@
-/* import { Injectable } from '@angular/core';
+ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Invoice } from '../_models/invoice';
+import { Invoice } from '../_models/ invoice';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +17,13 @@ export class InvoiceService {
   }
 
   /* REQUERIMIENTO 4. Implementar servicio Invoice - función getInvoices() */
-  //getInvoices() {}
+  getInvoices(rfc: string) {
+    const params = { rfc };
+    return this.http.get<Invoice[]>(`${this.url}${this.route}`, { params });
+  }
 
   /* REQUERIMIENTO 4. Implementar servicio Invoice - función generateInvoice() */
-  //generateInvoice() {}
-//}
-// */
+  generateInvoice(rfc: string) {
+    return this.http.post(`${this.url}${this.route}/${rfc}`, null);
+  }
+}
