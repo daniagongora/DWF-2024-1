@@ -1,0 +1,182 @@
+<div class="card">
+
+    <!-- Table title  -->
+  
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md">
+          <h5 class="table-title">Clientes</h5>
+        </div>
+        <div class="col-md">
+          <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()">
+            <i class="ph ph-plus icon-text-button"></i>
+            Nuevo cliente
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Table content -->
+  
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr class="table-primary">
+            <th>No.</th>
+            <th>Nombre</th>
+            <th>RFC</th>
+            <th>Estatus</th>
+            <th>Más</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ customer.name + " " + customer.surname }}</td>
+            <td>{{ customer.rfc }}</td>
+            <td>
+              <div class="td-status"
+              [ngClass]="{'td-status-disable': customer.status == 1, 'td-status-enable': customer.status == 0}" >
+                {{ customer.status == 0 ? "Inactivo" : "Activo" }}
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item"  (click)="showCustomer(customer.rfc)">
+                    <i class="ph ph-pencil-circle icon-text-ul"></i>Ver detalles
+                  </a>
+                  <a *ngIf="customer.status == 0" class="dropdown-item enable-item" (click)="enableCustomer(customer.customer_id)">
+                    <i class="ph ph-check-fat icon-text-ul"></i>Activar
+                  </a>
+                  <a *ngIf="customer.status == 1" class="dropdown-item disable-item" (click)="disableCustomer(customer.customer_id)">
+                    <i class="ph ph-prohibit icon-text-ul"></i> Desactivar
+                  </a>
+                </div>
+              </div>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Modal form  -->
+  
+  <div class="modal fade" data-bs-backdrop="static" tabindex="-1" role="dialog" id="modalForm">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Registrar cliente</h5>
+          <button type="button" class="modal-close-button" data-bs-dismiss="modal" aria-label="Close">
+            <span class="modal-close-button-x">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+  
+          <!-- form  -->
+  
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  
+            
+            <div class="row">
+
+                <!-- name  -->
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Nombre <span class="color-red">*</span> </label>
+                        <input type="text" class="form-control" formControlName="name" id="name" placeholder="Nombre del cliente..." 
+                            [ngClass]="{'is-invalid': form.controls['name'].errors && submitted}" >
+                        <div *ngIf="form.controls['name'].errors && submitted">
+                            <small class="color-red">Favor de ingresar un nombre válido</small>
+                        </div>
+                    </div>
+                </div>
+      
+                <!-- surname  -->
+      
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                    <label for="surname">Apellidos <span class="color-red">*</span> </label>
+                    <input type="text" class="form-control" formControlName="surname" id="surname" placeholder="Apellidos del cliente..." 
+                        [ngClass]="{'is-invalid': form.controls['surname'].errors && submitted}" >
+                    <div *ngIf="form.controls['surname'].errors && submitted">
+                        <small class="color-red">Favor de ingresar apellidos válidos</small>
+                    </div>
+                    </div>
+                </div>
+      
+                <!-- rfc  -->
+      
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                    <label for="rfc">RFC <span class="color-red">*</span> </label>
+                    <input type="text" class="form-control" formControlName="rfc" id="rfc" placeholder="RFC del cliente..." 
+                        [ngClass]="{'is-invalid': form.controls['rfc'].errors && submitted}" >
+                    <div *ngIf="form.controls['rfc'].errors && submitted">
+                        <small class="color-red">Favor de ingresar un rfc válido</small>
+                    </div>
+                    </div>
+                </div>
+      
+                <!-- mail  -->
+      
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                    <label for="mail">Correo electrónico <span class="color-red">*</span> </label>
+                    <input type="text" class="form-control" formControlName="mail" id="mail" placeholder="Correo electrónico del cliente..." 
+                        [ngClass]="{'is-invalid': form.controls['mail'].errors && submitted}" >
+                    <div *ngIf="form.controls['mail'].errors && submitted">
+                        <small class="color-red">Favor de ingresar un correo electrónico válido</small>
+                    </div>
+                    </div>
+                </div>  
+      
+                <!-- region_id  -->
+      
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                      <label for="region_id">Región <span class="color-red">*</span> </label>
+                      <select class="form-select" formControlName="region_id" id="region_id"
+                          [ngClass]="{'is-invalid': form.controls['region_id'].errors && submitted}">
+                          <option [ngValue]=null hidden>Selecciona una región...</option>
+                          <ng-container *ngFor="let region of regions" >
+                              <option *ngIf="region.status == 1" [ngValue]="region.region_id">{{ region.region }}</option>
+                          </ng-container>
+                      </select>
+                      <div *ngIf="form.controls['region_id'].errors && submitted">
+                          <small class="color-red">Favor de seleccionar una región válida</small>
+                      </div>
+                    </div>
+                </div>
+      
+                <!-- address  -->
+      
+                <div class="form-group">
+                  <label for="address">Dirección <span class="color-red">*</span> </label>
+                  <textarea rows="2" class="form-control" formControlName="address" id="address" placeholder="Dirección del cliente..." 
+                    [ngClass]="{'is-invalid': form.controls['address'].errors && submitted}" >
+                  </textarea>
+                  <div *ngIf="form.controls['address'].errors && submitted">
+                    <small class="color-red">Favor de ingresar una dirección válida</small>
+                  </div>
+                </div>
+            </div>
+  
+            <!-- button  -->
+            
+            <div class="form-button">
+              <button type="submit" class="btn btn-primary btn-form">Guardar</button>
+            </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
