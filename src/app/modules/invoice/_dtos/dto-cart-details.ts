@@ -1,4 +1,4 @@
-import { Product } from "../../product/_models/product"
+import { Item } from "../../invoice/_models/ item"
 
 export class DtoCartDetails{
     cart_id: number = 0;
@@ -7,6 +7,6 @@ export class DtoCartDetails{
     quantity: number = 0;
     status: number = 0;
 
-    product: Product = new Product();
+    item: Item = new Item();
     image: string = "";
 }

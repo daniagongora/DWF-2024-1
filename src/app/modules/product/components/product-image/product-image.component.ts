@@ -46,6 +46,7 @@ export class ProductImageComponent {
     private categoryService: CategoryService, // servicio category de API
     private route: ActivatedRoute, // recupera parámetros de la url
     private router: Router, // redirigir a otro componente
+    private cartService: CartService,
 
     private service: NgxPhotoEditorService
   ){}
@@ -66,6 +67,51 @@ export class ProductImageComponent {
     }
   }
   
+  addToCart(product: any) {
+    const cart = {
+      cart_id: 0, // Reemplaza con el ID del carrito, si es necesario
+      gtin: product.gtin, // Reemplaza con el GTIN del producto
+      image: product.image, // Reemplaza con la URL de la imagen del producto, si es necesario
+      product: {
+        // Aquí incluye los detalles del producto que se espera en el cuerpo de la solicitud
+        category_id: product.category_id,
+        description: product.description,
+        // ... otros campos del producto
+      },
+      quantity: 1, // Ejemplo: se está agregando una unidad del producto al carrito
+      rfc: "SAAI920101A01" // Reemplaza con el RFC del cliente proporcionado
+    };
+  
+    this.cartService.addToCart(cart).subscribe(
+      () => {
+        // Mensaje de éxito al agregar al carrito
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          text: 'Producto agregado al carrito',
+          background: '#E8F8F8',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },
+      (err) => {
+        // Mensaje de error si falla al agregar al carrito
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: 'Error al agregar al carrito',
+          background: '#F8E8F8',
+          timer: 2000
+        });
+        console.error('Error al agregar al carrito:', err);
+      }
+    );
+  }
+  
+
   getProduct() {
     this.productService.getProduct(this.gtin).subscribe(
       (res) => {
