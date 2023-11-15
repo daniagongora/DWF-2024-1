@@ -1,1 +1,13 @@
-<p>cart works!</p>
+<div *ngIf="cartItems.length > 0; else emptyCart">
+    <h2>Carrito de compras</h2>
+    <ul>
+      <li *ngFor="let item of cartItems">
+        <span>item.gtin</span> 
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #emptyCart>
+    <p>No hay elementos en el carrito.</p>
+  </ng-template>
+  

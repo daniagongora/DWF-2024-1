@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../_services/cart.service';
-import { Product } from 'src/app/modules/product/_models/product';
 import { DtoCartDetails } from '../../_dtos/dto-cart-details';
 
 @Component({
@@ -14,7 +13,7 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.getCart();
   }
 
@@ -24,33 +23,12 @@ export class CartComponent implements OnInit {
         if (Array.isArray(response)) {
           this.cartItems = response as DtoCartDetails[];
         } else {
-          // Manejo de error o lógica adicional si es necesario
           console.error('Error al obtener el carrito. Respuesta inesperada:', response);
         }
       },
       (error: any) => {
-        // Manejo de errores
         console.error('Error al obtener el carrito:', error);
       }
     );
-  }
-  
-
-  addToCart(product: Product) {
-    this.cartService.addToCart(this.rfc).subscribe(() => {
-      this.getCart();
-    });
-  }
-
-  removeItem(id: number) {
-    this.cartService.removeFromCart(id).subscribe(() => {
-      this.getCart();
-    });
-  }
-
-  clearCart(id: number) {
-    this.cartService.deleteCart(id).subscribe(() => {
-      this.cartItems = [];
-    });
   }
 }
