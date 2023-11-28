@@ -21,8 +21,7 @@ export class CartService {
 
   /* REQUERIMIENTO 4. Implementar servicio Cart - función getCart() */
   getCart(rfc: string) {
-    const params = new HttpParams().set('rfc', rfc);
-    return this.http.get(this.url + this.route, { params });
+    return this.http.get(this.url + this.route + "/" + rfc);
   }
 
   /* REQUERIMIENTO 4. Implementar servicio Cart - función removeFromCart() */

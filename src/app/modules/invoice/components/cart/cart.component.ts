@@ -36,7 +36,7 @@ export class CartComponent implements OnDestroy {
   }
 
   getCart() {
-    this.cartService.getCart(this.rfc).subscribe(
+    this.cartService.getCart("SAAI920101A01").subscribe(
       (res: any) => {
         this.cart = Object.values(res); // Convierte las propiedades del objeto en un array
         this.calculateTotal(); // Calcula el total al obtener el carrito
