@@ -8,6 +8,7 @@ export class CartService {
 
   private url = "http://localhost:8080";
   private route = "/cart";
+  private clear = "/clear";
 
   constructor(private http: HttpClient) { }
 
@@ -28,5 +29,10 @@ export class CartService {
   removeFromCart(id:number) {
     return this.http.delete(this.url + this.route + '/' + id);
   
+  }
+
+  /*clean cart*/
+  cleanCart(rfc: string){
+    return this.http.delete(this.url + this.route + this.clear+ "/" + rfc);
   }
 }
