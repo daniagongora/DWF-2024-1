@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { CartInteractionService } from 'src/app/modules/product/_services/cart-interaction.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-nombreCurso: string = "DWF-2024-1";
+  constructor(
+    private cartInteractionService: CartInteractionService,
+    private router: Router
+  ) {}
 
 }

@@ -9,11 +9,12 @@ import {NgxPhotoEditorModule} from "ngx-photo-editor";
 import { ProductImageComponent } from './components/product-image/product-image.component';
 
 
+
 @NgModule({
   declarations: [
     CategoryComponent,
     ProductComponent,
-    ProductImageComponent
+    ProductImageComponent,
   ],
   imports: [
     CommonModule,

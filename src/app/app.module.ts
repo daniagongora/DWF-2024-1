@@ -6,6 +6,8 @@ import { ProductModule } from './modules/product/product.module'; // Importa el 
 import { CustomerModule } from './modules/customer/customer.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { LayoutModule } from './modules/layout/layout.module';
+import { NgxPayPalModule } from 'ngx-paypal';
+
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { LayoutModule } from './modules/layout/layout.module';
     ProductModule, // Agrega el módulo "ProductModule" a la lista de imports
     CustomerModule,
     LayoutModule, 
-    InvoiceModule
+    InvoiceModule,
+    NgxPayPalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
