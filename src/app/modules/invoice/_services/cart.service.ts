@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { DtoCartDetails } from '../_dtos/dto-cart-details';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class CartService {
 
   /* REQUERIMIENTO 4. Implementar servicio Cart - función getCart() */
   getCart(rfc: string) {
-    return this.http.get(this.url + this.route + "/" + rfc);
+    return this.http.get<DtoCartDetails[]>(this.url + this.route + "/" + rfc);
   }
 
   /* REQUERIMIENTO 4. Implementar servicio Cart - función removeFromCart() */
