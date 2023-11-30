@@ -17,7 +17,7 @@ export class RegionService {
   }
 
   enableRegion(id: number) {
-    return this.http.put(this.url + this.route + "/" + id + "/activate", null);
+    return this.http.put(this.url + this.route + "/" + id + "/activate", null); 
   }
 
   disableRegion(id: number) {

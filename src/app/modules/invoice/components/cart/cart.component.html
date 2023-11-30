@@ -41,31 +41,33 @@
           </div>
         </div>
       </div>
+
 <!-- Summary -->
 <div class="col-md-4">
   <div class="card">
     <div class="card-header">
-      <h5 class="mb-0">Summary</h5>
+      <h5 class="mb-0">Resumen de compra</h5>
     </div>
     <div class="card-body">
       <ul class="list-group list-group-flush">
+        <!-- Mostrar los productos con su cantidad -->
         <li *ngFor="let item of cart" class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
           <div>
-            {{item.product.product}}
+            {{ item.product.product }} x {{ item.quantity }} <!-- Mostrar el nombre del producto con la cantidad -->
           </div>
           <div>
-            {{item.product.price | currency}}
-          </div>  
+            {{ item.product.price | currency }} <!-- Mostrar el precio -->
+          </div>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-          Shipping
+          Envío
           <span>Gratis</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
           <div>
-            <strong>Total amount</strong>
+            <strong>Total</strong>
             <strong>
-              <p class="mb-0">(including VAT)</p>
+              <p class="mb-0">(incluyendo IVA)</p>
             </strong>
           </div>
           <span><strong>${{ total }}</strong></span> <!-- Muestra el total directamente -->
@@ -74,11 +76,12 @@
 
       <button type="button" class="btn btn-primary btn-lg btn-block">
         <a routerLink="/invoice" class="btn btn-outline-success">Checkout</a>
-
       </button>
     </div>
   </div>
 </div>
+<!-- Summary -->
+
 
       <!-- Summary -->
     </div>

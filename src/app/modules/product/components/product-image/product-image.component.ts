@@ -25,7 +25,8 @@ export class ProductImageComponent {
   productImages: ProductImage[] = [];
   categorys: Category[] = []; // lista de categoryes
   category: any | Category = new Category(); // datos de la región del cliente
-  
+  selectedQuantity: number = 1;
+  quantityOptions: number[] = [1, 2, 3, 4, 5]; 
 
   // formulario de actualización
   form = this.formBuilder.group({
@@ -67,9 +68,9 @@ export class ProductImageComponent {
     }
   }
   
-  addToCart(product: any) {
+  addToCart(product: any, quantity: number) {
     const cart = {
-      cart_id: 0, // Reemplaza con el ID del carrito, si es necesario
+      art_id: 0, // Reemplaza con el ID del carrito, si es necesario
       gtin: product.gtin, // Reemplaza con el GTIN del producto
       image: product.image, // Reemplaza con la URL de la imagen del producto, si es necesario
       product: {
@@ -78,10 +79,10 @@ export class ProductImageComponent {
         description: product.description,
         // ... otros campos del producto
       },
-      quantity: 1, // Ejemplo: se está agregando una unidad del producto al carrito
+      quantity: quantity, // Ejemplo: se está agregando una unidad del producto al carrito
       rfc: "SAAI920101A01" // Reemplaza con el RFC del cliente proporcionado
     };
-  
+
     this.cartService.addToCart(cart).subscribe(
       () => {
         // Mensaje de éxito al agregar al carrito

@@ -28,97 +28,100 @@
           </label>
         </div>
       </div>
-      <!-- Contenido del carrusel -->
-      <div class="container">
-        <div class="box">
-          <div class="product-img">
-            <!-- Mostrar imágenes aquí -->
-            <div id="carouselExample" class="carousel slide">
-              <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                  <!-- Verifica si hay imágenes de producto, si no, muestra la imagen predeterminada -->
-                  <ng-container *ngIf="productImages && productImages.length > 0; else defaultImage">
-                    <div class="carousel-item" *ngFor="let productImage of productImages; let i = index" [class.active]="i === 0">
-                      <img [src]="productImage.image" class="d-block w-100" alt="Image {{i + 1}}">
-                      <span (click)="deleteImage(productImage.product_image_id)" class="delete-span">
-                        <i class="ph ph-trash icon-text-ul"></i>
-                        Eliminar
-                      </span>
-                    </div>
-                  </ng-container>
-                  <ng-template #defaultImage>
-                    <!-- Muestra la imagen predeterminada si no hay imágenes de producto -->
-                    <div class="carousel-item active">
-                      <img src="assets/descarga.png" class="d-block w-100" alt="Image predeterminada">
-                      <!-- No necesitas el botón Eliminar para la imagen predeterminada -->
-                    </div>
-                  </ng-template>
-                </div>
-              
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" ariahidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-            </div>
+     <!-- Contenido del carrusel -->
+   <div class="container">
+    <div class="box">
+     <div class="product-img">
+      <!-- Mostrar imágenes aquí -->
+      <div id="carouselExample" class="carousel slide">
+       <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+         <!-- Verifica si hay imágenes de producto, si no, muestra la imagen predeterminada -->
+         <ng-container *ngIf="productImages && productImages.length > 0; else defaultImage">
+          <div class="carousel-item" *ngFor="let productImage of productImages; let i = index" [class.active]="i === 0">
+           <img [src]="productImage.image" class="d-block w-100" alt="Image {{i + 1}}">
+           <span (click)="deleteImage(productImage.product_image_id)" class="delete-span">
+            <i class="ph ph-trash icon-text-ul"></i>
+            Eliminar
+           </span> 
           </div>
-          <div class="product-info">
-            <div class="col-md-8">
-              
-                <div class="card-body-customer">
-                 
-                  <div class="product-info">
-                    <div class="product-title">
-                      {{ product.product }}
-                    </div>
-                    <ul>
-                      <li>
-                        <strong>GTIN:</strong> {{ product.gtin }}
-                      </li>
-                      <li>
-                        <strong>Descripción:</strong>  {{ product.description }}
-                      </li>
-                      <li>
-                        
-                        <strong>Stock:</strong> {{ product.stock }}
-                      </li>
-                      <li>
-                       <span class="price-highlight">${{ product.price }}</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              
-            </div>
-            <div class="col-md-8">
-              
-                <div class="card-body-customer">
-                  <select class="qty">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                  <br /><br />
-                  
-                </div>
-                
-             
-              <button type="button" class="btn btn-success btn btn-primary btn-lg" (click)="addToCart(product)">Añadir al carro</button>
-            </div>
+          
+         </ng-container>
+         <ng-template #defaultImage>
+          <!-- Muestra la imagen predeterminada si no hay imágenes de producto -->
+          <div class="carousel-item active">
+           <img src="assets/descarga.png" class="d-block w-100" alt="Image predeterminada">
+           <!-- No necesitas el botón Eliminar para la imagen predeterminada -->
           </div>
+         </ng-template>
         </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+         <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+         <span class="carousel-control-next-icon" ariahidden="true"></span>
+         <span class="visually-hidden">Next</span>
+        </button>
+       </div>
       </div>
-      
+     </div>
+     <div class="product-info">
+      <div class="col-md-8">
+        
+        <div class="card-body-customer">
+         
+         <div class="product-info">
+          <div class="product-title">
+           {{ product.product }}
+          </div>
+          <ul>
+           <li>
+            <strong>GTIN:</strong> {{ product.gtin }}
+           </li>
+           <li>
+            <strong>Descripción:</strong> {{ product.description }}
+           </li>
+           <li>
+             
+            <strong>Stock:</strong> {{ product.stock }}
+           </li>
+           <li>
+            <span class="price-highlight">${{ product.price }}</span>
+           </li>
+          </ul>
+         </div>
+        </div>
+        
+      </div>
+       
+      <!-- Botón "Añadir al carro" y selección de cantidad -->
+      <div class="card-footer text-center">
+        <div class="col-md-8 offset-md-2">
+          <div class="card-body-customer col-md-4">
+            <label for="quantity">Cantidad:</label>
+            <select class="qty form-select" id="quantity" [(ngModel)]="selectedQuantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <br /><br />
+          </div>
+          <button type="button" class="btn btn-primary btn-lg w-100" (click)="addToCart(product, selectedQuantity)">
+            Añadir al carro
+          </button>
+        </div>
+       
+     </div>
     </div>
+   </div>
+    
   </div>
+ </div>
 </div>
-
 
 <!-- Modal form -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog">

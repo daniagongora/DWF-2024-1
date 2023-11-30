@@ -66,14 +66,13 @@ export class CartComponent implements OnDestroy {
   }
 
   calculateTotal() {
-    // Reinicia el total
     this.total = 0;
-
-    // Suma los precios de los productos en el carrito
+  
     this.cart.forEach(item => {
-      this.total += item.product.price;
+      this.total += item.product.price * item.quantity; // Multiplica el precio por la cantidad
     });
   }
+  
 
   ngOnDestroy() {
     // Unsubscribe to prevent memory leaks

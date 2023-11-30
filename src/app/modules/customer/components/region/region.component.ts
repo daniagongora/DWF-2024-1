@@ -36,37 +36,6 @@ export class RegionComponent {
 
   // CRUD region
 
-  disableRegion(id: number){
-    this.regionService.disableRegion(id).subscribe(
-      res => {
-        // muestra mensaje de confirmación
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          toast: true,
-          text: 'La región ha sido desactivada',
-          background: '#E8F8F8',
-          showConfirmButton: false,
-          timer: 2000
-        });
-
-        this.getRegions(); // consulta regiones con los cambios realizados
-      },
-      err => {
-        // muestra mensaje de error
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          showConfirmButton: false,
-          text: err.error.message,
-          background: '#F8E8F8',
-          timer: 2000
-        });
-      }
-    );
-  }
-
   enableRegion(id: number){
     this.regionService.enableRegion(id).subscribe(
       res => {
@@ -80,7 +49,7 @@ export class RegionComponent {
           showConfirmButton: false,
           timer: 2000
         });
-
+  
         this.getRegions(); // consulta regiones con los cambios realizados
       },
       err => {
@@ -97,6 +66,38 @@ export class RegionComponent {
       }
     );
   }
+  
+  disableRegion(id: number){
+    this.regionService.disableRegion(id).subscribe(
+      res => {
+        // muestra mensaje de confirmación
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          text: 'La región ha sido desactivada',
+          background: '#E8F8F8',
+          showConfirmButton: false,
+          timer: 2000
+        });
+  
+        this.getRegions(); // consulta regiones con los cambios realizados
+      },
+      err => {
+        // muestra mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F8E8F8',
+          timer: 2000
+        });
+      }
+    );
+  }
+  
 
   getRegions(){
     this.regionService.getRegions().subscribe(
