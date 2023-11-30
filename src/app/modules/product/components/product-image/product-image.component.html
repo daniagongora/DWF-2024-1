@@ -35,25 +35,24 @@
       <!-- Mostrar imágenes aquí -->
       <div id="carouselExample" class="carousel slide">
        <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-         <!-- Verifica si hay imágenes de producto, si no, muestra la imagen predeterminada -->
-         <ng-container *ngIf="productImages && productImages.length > 0; else defaultImage">
-          <div class="carousel-item" *ngFor="let productImage of productImages; let i = index" [class.active]="i === 0">
-           <img [src]="productImage.image" class="d-block w-100" alt="Image {{i + 1}}">
-           <span (click)="deleteImage(productImage.product_image_id)" class="delete-span">
-            <i class="ph ph-trash icon-text-ul"></i>
-            Eliminar
-           </span> 
-          </div>
-          
-         </ng-container>
-         <ng-template #defaultImage>
-          <!-- Muestra la imagen predeterminada si no hay imágenes de producto -->
-          <div class="carousel-item active">
-           <img src="assets/descarga.png" class="d-block w-100" alt="Image predeterminada">
-           <!-- No necesitas el botón Eliminar para la imagen predeterminada -->
-          </div>
-         </ng-template>
+        <div class="carousel-inner position-relative">
+          <!-- Verifica si hay imágenes de producto, si no, muestra la imagen predeterminada -->
+          <ng-container *ngIf="productImages && productImages.length > 0; else defaultImage">
+            <div class="carousel-item" *ngFor="let productImage of productImages; let i = index" [class.active]="i === 0">
+              <img [src]="productImage.image" class="d-block w-100" alt="Image {{i + 1}}">
+              <span (click)="deleteImage(productImage.product_image_id)" class="delete-span">
+                <i class="ph ph-trash icon-text-ul"></i>
+                Eliminar
+              </span>
+            </div>
+          </ng-container>
+          <ng-template #defaultImage>
+            <!-- Muestra la imagen predeterminada si no hay imágenes de producto -->
+            <div class="carousel-item active">
+              <img src="assets/descarga.png" class="d-block w-100" alt="Image predeterminada">
+              <!-- No necesitas el botón Eliminar para la imagen predeterminada -->
+            </div>
+          </ng-template>
         </div>
         
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

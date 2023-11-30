@@ -36,7 +36,9 @@
 
               <hr class="my-4" />
             </div>
-
+            <div class="text-left">
+              <button class="btn btn-secondary" (click)="clearCart()">Limpiar carrito</button>
+            </div>
             <!-- Cart items -->
           </div>
         </div>
@@ -75,20 +77,18 @@
       </ul>
 
       <button type="button" class="btn btn-primary btn-lg btn-block">
-        <a routerLink="/invoice" class="btn btn-outline-success">Checkout</a>
+        <a routerLink="/invoice" class="btn btn-primary btn-lg w-100">Comprar</a>
       </button>
     </div>
   </div>
 </div>
 <!-- Summary -->
 
-
-      <!-- Summary -->
     </div>
 
     <div class="card mb-4 mb-lg-0">
       <div class="card-body">
-        <p><strong>We accept</strong></p>
+        <p><strong>Aceptamos</strong></p>
         <img src="assets/visa.png" width="45px"  alt="Visa">
         <img src="assets/amex.png" width="45px"  alt="Amex">
         <img src="assets/paypal.png" width="45px"  alt="Paypal">
@@ -96,8 +96,6 @@
     </div>
   </div>
 
-  <!-- Button to clear the cart -->
-<div class="text-left">
-  <button class="btn btn-danger" (click)="clearCart()">Limpiar carrito</button>
-</div>
+
+
 </section>

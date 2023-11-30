@@ -699,6 +699,19 @@ body {
     font-family: "Roboto", sans-serif;
     text-decoration: none;
   }
+
+  .carousel-item {
+    position: relative;
+  }
+  
+  .delete-span {
+    position: absolute;
+    bottom: -1px; /* Ajusta según necesites */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  
   
 
   
