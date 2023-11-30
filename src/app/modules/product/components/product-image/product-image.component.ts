@@ -92,7 +92,7 @@ export class ProductImageComponent {
           text: 'Producto agregado al carrito',
           background: '#E8F8F8',
           showConfirmButton: false,
-          timer: 2000
+          timer: 1000
         });
       },
       (err) => {

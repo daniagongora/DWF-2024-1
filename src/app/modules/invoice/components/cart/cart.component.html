@@ -4,19 +4,21 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">
-            <h5 class="mb-0">Cart - {{ cart.length }} items</h5>
+            <h5 class="mb-0">{{ cart.length }} productos </h5>
           </div>
           <div class="card-body">
-            <!-- Cart items -->
+              <!-- Cart items -->
             <div *ngFor="let item of cart" class="mb-4">
               <!-- Single item -->
               <div class="row">
                 <div class="col-md-4">
-                  <!-- If you have content for this column, add it here -->
-                  <img [src]="item.product.image" alt="">
+                  <!-- Icon to remove the product -->
+                  <span (click)="removeFromCart(item.cart_id)" class="remove-icon"><i class="ph ph-x"></i></span>
+                  
+                  <img src="assets/descarga.png" class="d-block w-100" alt="Image predeterminada">
                 </div>
                 <div class="col-md-8">
-                  <!-- Cart item details -->
+                 
                   <div class="product-info">
                     <div class="product-title">
                       {{ item.product.product }}
@@ -34,6 +36,7 @@
 
               <hr class="my-4" />
             </div>
+
             <!-- Cart items -->
           </div>
         </div>
@@ -89,4 +92,9 @@
       </div>
     </div>
   </div>
+
+  <!-- Button to clear the cart -->
+<div class="text-left">
+  <button class="btn btn-danger" (click)="clearCart()">Limpiar carrito</button>
+</div>
 </section>
