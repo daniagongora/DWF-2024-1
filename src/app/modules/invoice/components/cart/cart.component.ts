@@ -7,6 +7,11 @@ import { CartInteractionService } from 'src/app/modules/product/_services/cart-i
 import { ProductImageService } from 'src/app/modules/product/_services/product-images.service';
 import { Subscription } from 'rxjs';
 import { ProductImage } from 'src/app/modules/product/_models/product-image';
+import { Customer } from 'src/app/modules/customer/_models/customer';
+import { CustomerImage } from 'src/app/modules/customer/_models/customer-image';
+import { DtoItem } from '../../_dtos/dto-item';
+import { DtoInvoiceList } from '../../_dtos/dto-invoice-list';
+import { InvoiceService } from '../../_services/ invoice.service';
 
 declare var $: any; // jquery
 
@@ -27,6 +32,7 @@ export class CartComponent implements OnDestroy {
 
   constructor(
     private cartService: CartService,
+    private invoiceService: InvoiceService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -39,6 +45,18 @@ export class CartComponent implements OnDestroy {
       this.getCart();
     });
   }
+
+  public customer: Customer = {
+    image: new CustomerImage(),
+    customer_id: 1,
+    name: 'Iván',
+    surname: 'Saavedra',
+    rfc: 'SAAI920101A01',
+    mail: 'ivan.saavedra@ciencias.unam.mx',
+    address: 'Av. Universidad 3000',
+    status: 1,
+    region_id: 1
+  };
 
   getCart() {
     this.cartService.getCart("SAAI920101A01").subscribe(
@@ -141,7 +159,7 @@ export class CartComponent implements OnDestroy {
           timer: 2000
         });
       },
-      (err) => {
+      (err) => { 
         console.error('Error al limpiar el carrito:', err);
         // Muestra mensaje de error al usuario si es necesario
         Swal.fire({
@@ -157,6 +175,60 @@ export class CartComponent implements OnDestroy {
     );
   }
 
+  ConstruirItems(){
+      const items : DtoItem[] =[];
+      this.cart.forEach(producto => {
+        //const total : number = producto.quantity * producto.item.unit_price;
+        const total : number = 0;
+        let item : DtoItem = {
+          //gtin: producto.item.gtin,
+          gtin: "se va a cambiar",
+          quantity: producto.quantity,
+          subtotal: total,
+          taxes: 0,
+          total: total,
+         // unit_price: producto.item.unit_price
+         unit_price: 0
+        } 
+        items.push(item);
+      });
+      return items;
+  }
+
+  Crearfactura(){
+      const items : DtoItem[]= this.ConstruirItems();
+      const factura : DtoInvoiceList = {
+        rfc: this.customer.rfc,
+        taxes: 0,
+        subtotal: 0,
+        total: 0,
+        customer: this.customer,
+        items: items
+      }
+      this.invoiceService.generateInvoice(this.customer.rfc, factura).subscribe(res => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          text: 'Se completo la compra!',
+          background: '#E8F8F8',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },
+      err => {
+        console.log(err)
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text:  'Hubo un erro al realizar la compra: ${err}',
+          background: '#F8E8F8',
+          timer: 2000
+        });
+      })
+  }
 
 
 }

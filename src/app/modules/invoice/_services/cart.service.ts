@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { DtoCartDetails } from '../_dtos/dto-cart-details';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class CartService {
 
