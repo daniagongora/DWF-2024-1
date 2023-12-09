@@ -10,6 +10,7 @@ import { CategoryService } from '../../_services/category.service';
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { ProductImageService } from '../../_services/product-images.service';
 import { ProductImage } from '../../_models/product-image';
+import { DtoItem } from 'src/app/modules/invoice/_dtos/dto-item';
 
 declare var $: any; // jquery
 
@@ -27,6 +28,7 @@ export class ProductImageComponent {
   category: any | Category = new Category(); // datos de la región del cliente
   selectedQuantity: number = 1;
   quantityOptions: number[] = [1, 2, 3, 4, 5]; 
+  cart: any[] = []; // array del carrito
 
   // formulario de actualización
   form = this.formBuilder.group({
@@ -67,20 +69,42 @@ export class ProductImageComponent {
       });
     }
   }
-  
+  ConstruirItems(){
+    const items : DtoItem[] =[];
+    this.cart.forEach(producto => {
+      //const total : number = producto.quantity * producto.item.unit_price;
+      const total : number = 0;
+      let item : DtoItem = {
+        //gtin: producto.item.gtin,
+        gtin: "se va a cambiar",
+        quantity: producto.quantity,
+        subtotal: total,
+        taxes: 0,
+        total: total,
+       // unit_price: producto.item.unit_price
+       unit_price: 0
+      } 
+      items.push(item);
+    });
+    return items;
+}
   addToCart(product: any, quantity: number) {
     const cart = {
       art_id: 0, // Reemplaza con el ID del carrito, si es necesario
       gtin: product.gtin, // Reemplaza con el GTIN del producto
       image: product.image, // Reemplaza con la URL de la imagen del producto, si es necesario
       product: {
-        // Aquí incluye los detalles del producto que se espera en el cuerpo de la solicitud
         category_id: product.category_id,
         description: product.description,
-        // ... otros campos del producto
+        gtin: product.gtin, 
+        price: product.price,
+        product: product.product,
+        product_id: product.product_id,
+        status: product.status,
+        stock: product.stock
       },
-      quantity: quantity, // Ejemplo: se está agregando una unidad del producto al carrito
-      rfc: "SAAI920101A01" // Reemplaza con el RFC del cliente proporcionado
+      quantity: quantity, 
+      rfc: "SAAI920101A01" 
     };
 
     this.cartService.addToCart(cart).subscribe(

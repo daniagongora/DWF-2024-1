@@ -19,8 +19,7 @@ export class InvoiceService {
 
   /* REQUERIMIENTO 4. Implementar servicio Invoice - función getInvoices() */
   getInvoices(rfc: string) {
-    const params = { rfc };
-    return this.http.get<Invoice[]>(`${this.url}${this.route}`, { params });
+    return this.http.get<Invoice[]>(`${this.url}${this.route}/${rfc}`);
   }
 
   /* REQUERIMIENTO 4. Implementar servicio Invoice - función generateInvoice() */

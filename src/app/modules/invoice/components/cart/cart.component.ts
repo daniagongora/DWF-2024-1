@@ -195,6 +195,52 @@ export class CartComponent implements OnDestroy {
       return items;
   }
 
+  mostrarFactura(rfc: string) {
+    this.invoiceService.getInvoices("SAAI920101A01").subscribe(
+      (invoices: any[]) => {
+        if (invoices.length > 0) {
+          console.log(invoices);
+          
+        }
+      },
+      err => {
+        console.error('Hubo un error al obtener las facturas:', err);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: 'Hubo un error al obtener las facturas',
+          background: '#F8E8F8',
+          timer: 2000
+        });
+      }
+    );
+  }
+  
+  mostrarDetallesFactura(invoiceId: number) {
+    this.invoiceService.getInvoice(invoiceId).subscribe(
+      (invoiceDetails: any) => {
+        // Aquí puedes utilizar invoiceDetails para mostrar los detalles de la factura en la interfaz
+        console.log('Detalles de la factura:', invoiceDetails);
+  
+        // Podrías asignar invoiceDetails a una variable local para mostrarlo en tu interfaz o hacer alguna otra lógica de presentación
+      },
+      err => {
+        console.error('Hubo un error al obtener los detalles de la factura:', err);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: 'Hubo un error al obtener los detalles de la factura',
+          background: '#F8E8F8',
+          timer: 2000
+        });
+      }
+    );
+  }
+  
   Crearfactura(){
       const items : DtoItem[]= this.ConstruirItems();
       const factura : DtoInvoiceList = {
@@ -228,7 +274,13 @@ export class CartComponent implements OnDestroy {
           timer: 2000
         });
       })
+
+      this.mostrarFactura("SAAI920101A01");
+      this.mostrarDetallesFactura(18); 
+      //le puse un número como ejemplo, es decir le di un id de un invoice que yo cree, ahi cambienlo
   }
 
+  
+  
 
 }
