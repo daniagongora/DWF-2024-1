@@ -72,17 +72,17 @@ export class ProductImageComponent {
   ConstruirItems(){
     const items : DtoItem[] =[];
     this.cart.forEach(producto => {
-      //const total : number = producto.quantity * producto.item.unit_price;
-      const total : number = 0;
+      const total : number = producto.quantity * producto.item.unit_price;
+      //const total : number = 0;
       let item : DtoItem = {
-        //gtin: producto.item.gtin,
-        gtin: "se va a cambiar",
+        gtin: producto.item.gtin,
+        //gtin: "se va a cambiar",
         quantity: producto.quantity,
         subtotal: total,
         taxes: 0,
         total: total,
-       // unit_price: producto.item.unit_price
-       unit_price: 0
+        unit_price: producto.item.unit_price
+        //unit_price: 0
       } 
       items.push(item);
     });

@@ -10,6 +10,8 @@ import { MainViewComponent } from './modules/intro/main-view/main-view.component
 import { InvoiceComponent } from './modules/invoice/components/invoice/invoice.component';
 import { CartComponent } from './modules/invoice/components/cart/cart.component';
 import { ItemComponent } from './modules/invoice/components/item/item.component';
+import { InvoiceLastComponent } from './modules/invoice/components/invoice-last/invoice-last.component';
+import { InvoiceListComponent } from './modules/invoice/components/invoice-list/invoice-list.component';
 const routes: Routes = [
   // Otras rutas pueden estar presentes aquí
 
@@ -22,6 +24,9 @@ const routes: Routes = [
   { path: "customer", component: CustomerComponent },
   { path: "customer/:rfc", component: CustomerImageComponent },
   { path: "invoice", component: InvoiceComponent},
+  { path: "invoice/:id", component: InvoiceComponent},
+  { path: "invoice-last", component: InvoiceLastComponent},
+  { path: "invoice-list", component: InvoiceListComponent},
   { path: "cart", component: CartComponent},
   { path: "item", component: ItemComponent},
 

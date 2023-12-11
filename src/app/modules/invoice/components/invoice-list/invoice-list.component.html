@@ -1,0 +1,45 @@
+<div class="card">
+
+    <!-- Table title  -->
+  
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md">
+          <h5 class="table-title">Facturas</h5>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Table content -->
+  
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr class="table-primary">
+            <th>No.</th>
+            <th>ID</th>
+            <th></th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Ver detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoices; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ invoice.invoice_id }}</td>
+            <td>{{ invoice.rfc}}</td>
+            <td>{{ invoice.created_at }}</td>
+            <td>{{ invoice.total | currency: 'USD' }}</td>
+            <td>
+                  <a class="dropdown-item"  (click)="showInvoice(invoice.invoice_id)">
+                    <i class="ph ph-pencil-circle icon-text-ul"></i>Ver detalles
+                  </a>
+                  
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
