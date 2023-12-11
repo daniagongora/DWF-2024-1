@@ -276,8 +276,11 @@ export class CartComponent implements OnDestroy {
       })
 
       this.mostrarFactura("SAAI920101A01");
-      this.mostrarDetallesFactura(18); 
-      //le puse un número como ejemplo, es decir le di un id de un invoice que yo cree, ahi cambienlo
+      this.mostrarDetallesFactura(18);
+      this.router.navigate(['/invoice-last']).then(() => {
+        window.location.reload();
+      }); 
+      
   }
 
   

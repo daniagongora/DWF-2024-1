@@ -1,119 +1,78 @@
 <div class="card">
-    <div class="card-body">
-      <div class="container mb-5 mt-3">
-        <div class="row d-flex align-items-baseline">
-          <div class="col-xl-9">
-            <p style="color: #7e8d9f;font-size: 35px;">Factura &gt;&gt; <strong>ID: {{invoice.invoice_id}}</strong></p>
+  <div class="card-body">
+    <div class="container mb-5 mt-3">
+      <div class="row d-flex align-items-baseline">
+        <div class="col-xl-9">
+          <p style="color: #7e8d9f;font-size: 20px;">Factura &gt;&gt; <strong>{{invoice.invoice_id}}</strong></p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="col-md-12">
+          <div class="text-center">
+            <i class="far fa-building fa-4x ms-0" style="color:#8f8061 ;"></i>
+            <p style="color: #7e8d9f;font-size: 26px;">Nuestra Tienda</p>
           </div>
         </div>
-        <div class="container">
-          <div class="col-md-12">
-            <div class="text-center">
-              <i class="far fa-building fa-4x ms-0" style="color:#8f8061 ;"></i>
-              <p  style="color: #7e8d9f;font-size: 26px;">Nuestra Tienda</p>
+                <!-- ... -->
+        <div class="card-body">
+          <!-- ... -->
+          <div class="container">
+            <!-- ... -->
+            <div class="row">
+              <div class="col-xl-12">
+                <p style="color: #7e8d9f; font-size: 20px;">Detalles de la factura:</p>
+                <ul class="list-unstyled">
+                  <ng-container *ngFor="let item of invoice.items; let i = index">
+                    <li class="text-muted">
+                      <strong>Producto {{ i + 1 }}</strong><br>
+                      <strong>GTIN:</strong> {{ item.gtin }} <br>
+                      <strong>Cantidad:</strong> {{ item.quantity }} <br>
+                      <strong>Precio unitario:</strong> ${{ item.unit_price }} <br>
+                      <strong>Subtotal:</strong> ${{ item.total }}
+                    </li>
+                    <hr> <!-- Separador entre productos -->
+                  </ng-container>
+                </ul>
+              </div>
             </div>
+            <!-- ... -->
           </div>
-          <div class="row">
-            <div class="col-xl-8">
-              <ul class="list-unstyled">
-                <li class="text-muted">NOMBRE: <span style="color:#8f8061 ;"> Iván Saavedra</span></li>
-                <li class="text-muted">RFC: <span style="color:#8f8061 ;"> {{rfc}}</span></li>
-                <li class="text-muted">DIRECCIÓN: <span style="color:#8f8061 ;"> Av. Universidad 3000</span></li>
-                <li class="text-muted">REGION:<span style="color:#8f8061 ;"> Norte</span> </li>
-                <li class="text-muted">CORREO: <span style="color:#8f8061 ;"> ivan.saavedra@ciencias.unam.mx</span></li>
-              </ul>
-            </div>
-            <div class="col-xl-4">
-              <p style="color: #7e8d9f;font-size: 20px;">Datos de la factura:</p>
-              <ul class="list-unstyled">
-                <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061 ;"></i> <span
-                    class="fw-bold">ID:</span> {{invoice.invoice_id}}</li>
-                <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061 ;"></i> <span
-                    class="fw-bold">Fecha: </span> {{invoice.created_at }}</li>
-                <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061;"></i> <span
-                    class="me-1 fw-bold">Estatus:</span><span class="badge bg-warning text-black fw-bold">
-                    Pagado</span></li>
-              </ul>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-8">
+            <ul class="list-unstyled">
+              <li class="text-muted">NOMBRE: <span style="color:#8f8061 ;"> Iván Saavedra</span></li>
+              <li class="text-muted">RFC: <span style="color:#8f8061 ;"> {{rfc}}</span></li>
+              <li class="text-muted">DIRECCIÓN: <span style="color:#8f8061 ;"> Av. Universidad 3000</span></li>
+              <li class="text-muted">REGION:<span style="color:#8f8061 ;"> Norte</span> </li>
+              <li class="text-muted">CORREO: <span style="color:#8f8061 ;"> ivan.saavedra@ciencias.unam.mx</span></li>
+            </ul>
           </div>
+          <div class="col-xl-4">
+            <p style="color: #7e8d9f;font-size: 20px;">Datos de la factura:</p>
+            <ul class="list-unstyled">
+              <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061 ;"></i> <span
+                  class="fw-bold">ID:</span> {{invoice.invoice_id}}</li>
+              <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061 ;"></i> <span
+                  class="fw-bold">Fecha: </span> {{invoice.created_at }}</li>
+              <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061;"></i> <span
+                  class="me-1 fw-bold">Estatus:</span><span class="badge bg-warning text-black fw-bold">
+                  Pagado</span></li>
+            </ul>
+          </div>
+        </div>
+      
+        <hr>
+        <div class="row">
           
-          <div class="row my-2 mx-1 justify-content-center">
-            <div class="col-md-2 mb-4 mb-md-0">
-              <div class="
-                          bg-image
-                          ripple
-                          rounded-5
-                          mb-4
-                          overflow-hidden
-                          d-block
-                          " data-ripple-color="light">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(4).webp"
-                  class="w-100" height="100px" alt="Elegant shoes and shirt" />
-                <a href="#!">
-                  <div class="hover-overlay">
-                    <div class="mask" style="background-color: hsla(0, 0%, 98.4%, 0.2)"></div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-md-7 mb-4 mb-md-0">
-              <p class="fw-bold">Custom suit</p>
-              <p class="mb-1">
-                <span class="text-muted me-2">Size:</span><span>8.5</span>
-              </p>
-              <p>
-                <span class="text-muted me-2">Color:</span><span>Gray</span>
-              </p>
-            </div>
-            <div class="col-md-3 mb-4 mb-md-0">
-              <h5 class="mb-2">
-                <s class="text-muted me-2 small align-middle">$1500</s><span class="align-middle">$1050</span>
-              </h5>
-              <p class="text-danger"><small>You save 25%</small></p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xl-8">
-              <p class="ms-3">Add additional notes and payment information</p>
-            </div>
-            <div class="col-xl-3">
-              <ul class="list-unstyled">
-                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$1050</li>
-                <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Shipping</span>$15</li>
-              </ul>
-              <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span
-                  style="font-size: 25px;">$1065</span></p>
+          <div class="col-xl-3">
             
-            </div>
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                  <!-- Mostrar los productos con su cantidad -->
-                  <li *ngFor="let item of cart" class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                    <div>
-                      {{ item.product.product }} x {{ item.quantity }} <!-- Mostrar el nombre del producto con la cantidad -->
-                    </div>
-                    <div>
-                      {{ item.product.price | currency }} <!-- Mostrar el precio -->
-                    </div>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Envío
-                    <span>Gratis</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                    <div>
-                      <strong>Total</strong>
-                      <strong>
-                        <p class="mb-0">(incluyendo IVA)</p>
-                      </strong>
-                    </div>
-                    <span><strong>${{ invoice.total }}</strong></span> <!-- Muestra el total directamente -->
-                  </li>
-                </ul>      
-              </div>
+            
+              <span
+              class="fw-bold">TOTAL:</span> ${{invoice.total}}
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
