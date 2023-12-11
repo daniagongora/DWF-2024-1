@@ -36,26 +36,25 @@ export class CategoryComponent {
 
   // CRUD region
 
-  enableCategory(id: number){
+  enableCategory(id: number) {
     this.categoryService.enableCategory(id).subscribe(
       res => {
-        // mensaje de confirmación
+        // Mensaje de confirmación
         Swal.fire({
           position: 'top-end',
           icon: 'success',
           toast: true,
           title: '¡Éxito!',
-          text: 'Se ha quitado la entrega',
+          text: 'Se ha activado la categoría',
           showConfirmButton: false,
           timer: 2000,
           background: '#F8F9FA',
         });
-        
-
-        this.getCategories(); // consulta regiones con los cambios realizados
+  
+        this.getCategories(); // Consulta categorías con los cambios realizados
       },
       err => {
-        // mensaje de error
+        // Mensaje de error
         Swal.fire({
           position: 'top-end',
           icon: 'error',
@@ -68,26 +67,26 @@ export class CategoryComponent {
       }
     );
   }
-
-  disableCategory(id: number){
+  
+  disableCategory(id: number) {
     this.categoryService.disableCategory(id).subscribe(
       res => {
-        // mensaje de confirmación
+        // Mensaje de confirmación
         Swal.fire({
           position: 'top-end',
           icon: 'success',
           toast: true,
           title: '¡Éxito!',
-          text: 'El postre se ha entregado',
+          text: 'Se ha desactivado la categoría',
           showConfirmButton: false,
           timer: 2000,
           background: '#F8F9FA',
         });
-
-        this.getCategories(); // consulta regiones con los cambios realizados
+  
+        this.getCategories(); // Consulta categorías con los cambios realizados
       },
       err => {
-        // mensaje de error
+        // Mensaje de error
         Swal.fire({
           position: 'top-end',
           icon: 'error',
@@ -100,7 +99,7 @@ export class CategoryComponent {
       }
     );
   }
-
+  
   getCategories(){
     this.categoryService.getCategories().subscribe(
       res => {

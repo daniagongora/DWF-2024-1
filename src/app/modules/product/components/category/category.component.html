@@ -36,8 +36,8 @@
           <td>{{ category.category }}</td>
           <td> 
             <div class="td-status"
-            [ngClass]="{'td-status-enable': category.status == 1, 'td-status-disable': category.status == 0}" >
-              {{ category.status == 0 ? "Entregado" : "Sin entregar" }}
+            [ngClass]="{'td-status-enable': category.status == 0, 'td-status-disable': category.status == 1}" >
+              {{ category.status == 1 ? "Activo" : "Inactivo" }}
             </div>
           </td>
           <td>
@@ -49,12 +49,13 @@
                 <a class="dropdown-item" (click)="updateCategory(category)">
                   <i class="ph ph-pencil-circle icon-text-ul"></i>Editar
                 </a>
-                <a *ngIf="category.status == 0" class="dropdown-item disable-item" (click)="enableCategory(category.category_id)">
-                  <i class="ph ph-prohibit icon-text-ul"></i>
-                  Quitar entrega
+                <a *ngIf="category.status == 0" class="dropdown-item enable-item" (click)="enableCategory(category.category_id)">
+                  <i class="ph ph-check-fat icon-text-ul"></i> Activar
                 </a>
-                <a *ngIf="category.status == 1" class="dropdown-item enable-item" (click)="disableCategory(category.category_id)">
-                  <i class="ph ph-check-fat icon-text-ul"></i> Entregar
+                <a *ngIf="category.status == 1" class="dropdown-item disable-item" (click)="disableCategory(category.category_id)">
+                  
+                  <i class="ph ph-prohibit icon-text-ul"></i>
+                  Desactivar
                 </a>
               </div>
             </div>

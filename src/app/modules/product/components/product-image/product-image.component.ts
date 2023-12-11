@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../_models/product';
 import { ProductService } from '../../_services/product.service';
-
+import { CartService } from 'src/app/modules/invoice/_services/cart.service';
 import Swal from'sweetalert2'; // sweetalert
 import { FormBuilder, Validators } from '@angular/forms';
 import { Category } from '../../_models/category';
@@ -10,6 +10,7 @@ import { CategoryService } from '../../_services/category.service';
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { ProductImageService } from '../../_services/product-images.service';
 import { ProductImage } from '../../_models/product-image';
+import { DtoItem } from 'src/app/modules/invoice/_dtos/dto-item';
 
 declare var $: any; // jquery
 
@@ -25,7 +26,9 @@ export class ProductImageComponent {
   productImages: ProductImage[] = [];
   categorys: Category[] = []; // lista de categoryes
   category: any | Category = new Category(); // datos de la región del cliente
-  
+  selectedQuantity: number = 1;
+  quantityOptions: number[] = [1, 2, 3, 4, 5]; 
+  cart: any[] = []; // array del carrito
 
   // formulario de actualización
   form = this.formBuilder.group({
@@ -46,6 +49,7 @@ export class ProductImageComponent {
     private categoryService: CategoryService, // servicio category de API
     private route: ActivatedRoute, // recupera parámetros de la url
     private router: Router, // redirigir a otro componente
+    private cartService: CartService,
 
     private service: NgxPhotoEditorService
   ){}
@@ -65,7 +69,74 @@ export class ProductImageComponent {
       });
     }
   }
+  ConstruirItems(){
+    const items : DtoItem[] =[];
+    this.cart.forEach(producto => {
+      const total : number = producto.quantity * producto.item.unit_price;
+      //const total : number = 0;
+      let item : DtoItem = {
+        gtin: producto.item.gtin,
+        //gtin: "se va a cambiar",
+        quantity: producto.quantity,
+        subtotal: total,
+        taxes: 0,
+        total: total,
+        unit_price: producto.item.unit_price
+        //unit_price: 0
+      } 
+      items.push(item);
+    });
+    return items;
+}
+  addToCart(product: any, quantity: number) {
+    const cart = {
+      art_id: 0, // Reemplaza con el ID del carrito, si es necesario
+      gtin: product.gtin, // Reemplaza con el GTIN del producto
+      image: product.image, // Reemplaza con la URL de la imagen del producto, si es necesario
+      product: {
+        category_id: product.category_id,
+        description: product.description,
+        gtin: product.gtin, 
+        price: product.price,
+        product: product.product,
+        product_id: product.product_id,
+        status: product.status,
+        stock: product.stock
+      },
+      quantity: quantity, 
+      rfc: "SAAI920101A01" 
+    };
+
+    this.cartService.addToCart(cart).subscribe(
+      () => {
+        // Mensaje de éxito al agregar al carrito
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          text: 'Producto agregado al carrito',
+          background: '#E8F8F8',
+          showConfirmButton: false,
+          timer: 1000
+        });
+      },
+      (err) => {
+        // Mensaje de error si falla al agregar al carrito
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: 'Error al agregar al carrito',
+          background: '#F8E8F8',
+          timer: 2000
+        });
+        console.error('Error al agregar al carrito:', err);
+      }
+    );
+  }
   
+
   getProduct() {
     this.productService.getProduct(this.gtin).subscribe(
       (res) => {

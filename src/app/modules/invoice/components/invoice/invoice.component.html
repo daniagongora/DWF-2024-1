@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="card-body">
+      <div class="container mb-5 mt-3">
+        <div class="row d-flex align-items-baseline">
+          <div class="col-xl-9">
+            <p style="color: #7e8d9f;font-size: 20px;">Factura &gt;&gt; <strong>{{invoice.invoice_id}}</strong></p>
+          </div>
+        </div>
+        <div class="container">
+          <div class="col-md-12">
+            <div class="text-center">
+              <i class="far fa-building fa-4x ms-0" style="color:#8f8061 ;"></i>
+              <p style="color: #7e8d9f;font-size: 26px;">Nuestra Tienda</p>
+            </div>
+          </div>
+                  <!-- ... -->
+          <div class="card-body">
+            <!-- ... -->
+            <div class="container">
+              <!-- ... -->
+              <div class="row">
+                <div class="col-xl-12">
+                  <p style="color: #7e8d9f; font-size: 20px;">Detalles de la factura:</p>
+                  <ul class="list-unstyled">
+                    <ng-container *ngFor="let item of invoice.items; let i = index">
+                      <li class="text-muted">
+                        <strong>Producto {{ i + 1 }}</strong><br>
+                        <strong>GTIN:</strong> {{ item.gtin }} <br>
+                        <strong>Cantidad:</strong> {{ item.quantity }} <br>
+                        <strong>Precio unitario:</strong> ${{ item.unit_price }} <br>
+                        <strong>Subtotal:</strong> ${{ item.total }}
+                      </li>
+                      <hr> <!-- Separador entre productos -->
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+              <!-- ... -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-8">
+              <ul class="list-unstyled">
+                <li class="text-muted">NOMBRE: <span style="color:#8f8061 ;"> Iván Saavedra</span></li>
+                <li class="text-muted">RFC: <span style="color:#8f8061 ;"> {{rfc}}</span></li>
+                <li class="text-muted">DIRECCIÓN: <span style="color:#8f8061 ;"> Av. Universidad 3000</span></li>
+                <li class="text-muted">REGION:<span style="color:#8f8061 ;"> Norte</span> </li>
+                <li class="text-muted">CORREO: <span style="color:#8f8061 ;"> ivan.saavedra@ciencias.unam.mx</span></li>
+              </ul>
+            </div>
+            <div class="col-xl-4">
+              <p style="color: #7e8d9f;font-size: 20px;">Datos de la factura:</p>
+              <ul class="list-unstyled">
+                <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061 ;"></i> <span
+                    class="fw-bold">ID:</span> {{invoice.invoice_id}}</li>
+                <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061 ;"></i> <span
+                    class="fw-bold">Fecha: </span> {{invoice.created_at }}</li>
+                <li class="text-muted"><i class="fas fa-circle" style="color:#8f8061;"></i> <span
+                    class="me-1 fw-bold">Estatus:</span><span class="badge bg-warning text-black fw-bold">
+                    Pagado</span></li>
+              </ul>
+            </div>
+          </div>
+        
+          <hr>
+          <div class="row">
+            
+            <div class="col-xl-3">
+              
+              
+                <span
+                class="fw-bold">TOTAL:</span> ${{invoice.total}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
